@@ -1,0 +1,1 @@
+CREATE DATABASE barber_service;

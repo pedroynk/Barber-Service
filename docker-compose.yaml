@@ -8,7 +8,7 @@ services:
     ports:
       - '5432:5432'
     volumes:
-      - ./postgresql-init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./postgresql-init.sql:/dockeqr-entrypoint-initdb.d/init.sql
 
 
   # springapp:

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html th:replace="~{layout :: layout (~{::title}, ~{::main}, _, ~{::scripts})}">
+
+<head>
+    <title>Usuários</title>
+</head>
+
+<body>
+    <main>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body table-responsive p-0">
+                        <a th:href="@{/usuarios/cadastrar}" class="btn btn-primary float-right mt-3"
+                            style="margin-bottom: 10px; margin-right: 10px; padding-right: 15px;">
+                            Cadastrar Usuário
+                        </a>
+                        <table class="table table-hover text-nowrap">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nome</th>
+                                    <th>E-mail</th>
+                                    <th>Tipo de usuário</th>
+                                    <th>Ativar/Destivar</th>
+
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="usuario : ${usuarios}">
+                                    <td th:text="${usuario.id}">183</td>
+                                    <td th:text="${usuario.nome}">Clara Giovana Daniela Duarte</td>
+                                    <td th:text="${usuario.email}">clara_giovana@gmail.com</td>
+                                    <td th:text="${usuario.perfil}">Desenvolvedor(a) Front End Jr</td>
+                                    <td>
+                                        <div class="dropdown-item">
+                                            <form id="ativarForm" th:action="@{ativar/{id} (id=${usuario.id})}"
+                                                method="GET" style="display: inline;">
+                                                <input type="hidden" th:value="${usuario.id}" name="id" />
+                                                <label class="switch">
+                                                    <input type="checkbox" th:data-user-id="${usuario.id}"
+                                                        th:checked="${usuario.ativo ? 'checked' : null}"
+                                                        onchange="this.form.submit()">
+                                                    <span class="slider round"></span>
+                                                </label>
+                                            </form>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-primary dropdown-toggle"
+                                            data-toggle="dropdown">Ações</button>
+                                        <div class="dropdown-menu">
+
+                                            <a class="dropdown-item" th:href="@{/usuarios/{id} (id=${usuario.id})}">
+                                                Visualizar
+                                            </a>
+                                            <a class="dropdown-item"
+                                                th:href="@{/usuarios/{id}/editar (id=${usuario.id})}"
+                                                th:if="${#authorization.expression('hasAuthority(''ADMINISTRADOR'')')}">
+                                                Editar
+                                            </a>
+                                            <a class="dropdown-item"
+                                                th:href="@{/usuarios/{id}/excluir (id=${usuario.id})}"
+                                                onclick="return confirm('Tem certeza que deseja excluir o usuario?');"
+                                                th:if="${#authorization.expression('hasAuthority(''ADMINISTRADOR'')')}">
+                                                Excluir
+                                            </a>
+                                        </div>
+
+                    </div>
+                    <td>
+                        </tr>
+                        </tbody>
+
+                        </table>
+                        <div>
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination justify-content-center">
+                                    <li class="page-item" th:classappend="${!usuarios.hasPrevious()} ? 'disabled' : ''">
+                                        <a class="page-link" th:href="@{/usuarios/listar(page=${usuarios.number - 1})}"
+                                            aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                        </a>
+                                    </li>
+                                    <li class="page-item"
+                                        th:each="item : ${#numbers.sequence(0, usuarios.totalPages - 1)}"
+                                        th:classappend="${item == usuarios.number} ? 'active' : ''">
+                                        <a class="page-link" th:href="@{/usuarios/listar(page=${item})}"
+                                            th:text="${item + 1}">1</a>
+                                    </li>
+                                    <li class="page-item" th:classappend="${!usuarios.hasNext()} ? 'disabled' : ''">
+                                        <a class="page-link" th:href="@{/usuarios/listar(page=${usuarios.number + 1})}"
+                                            aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+
+                        </div>
+
+                </div>
+            </div>
+        </div>
+        </div>
+    </main>
+
+    <th:block th:fragment="scripts">
+        <script>
+            $(function () {
+                $('[data-toggle="popover"]').popover()
+            })
+        </script>
+        <style>
+            .switch {
+                position: relative;
+                display: inline-block;
+                width: 60px;
+                height: 34px;
+            }
+
+            .switch input {
+                opacity: 0;
+                width: 0;
+                height: 0;
+            }
+
+            .slider {
+                position: absolute;
+                cursor: pointer;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: #ccc;
+                transition: .4s;
+            }
+
+            .slider:before {
+                position: absolute;
+                content: "";
+                height: 26px;
+                width: 26px;
+                left: 4px;
+                bottom: 4px;
+                background-color: white;
+                transition: .4s;
+            }
+
+            input:checked+.slider {
+                background-color: #2196F3;
+            }
+
+            input:checked+.slider:before {
+                transform: translateX(26px);
+            }
+        </style>
+
+    </th:block>
+</body>
+
+</html>

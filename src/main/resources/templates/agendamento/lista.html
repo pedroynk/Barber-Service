@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html th:replace="~{layout :: layout (~{::title}, ~{::main}, _, ~{::scripts})}">
+<head>
+    <title>Vendas</title>
+</head>
+<body>
+    <main>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body table-responsive p-0">
+                        <a th:href="@{/vendas/cadastrar}" class="btn btn-primary float-right mt-3"
+                            style="margin-bottom: 10px; margin-right: 10px; padding-right: 15px;">
+                            Cadastrar Venda
+                        </a>
+                        <table class="table table-hover text-nowrap">
+                            <thead>
+                                <tr>
+                                    <th>Número da Venda</th>
+                                    <th>Data da Venda</th>
+                                    <th>Forma de Pagamento</th>
+                                    <th>Quantidade</th>
+                                    <th>Valor Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="vendas : ${vendas}">
+                                    <td th:text="${vendas.numero}"></td>
+                                    <td th:text="${#temporals.format(vendas.dataVenda,'dd/MM/yyyy')}"></td>
+                                    <td th:text="${vendas.formaPagamento.descricao}"></td>
+                                    <td th:text="${vendas.quantidade}"></td>
+                                    <td th:text="${#numbers.formatCurrency(vendas.valorTotal)}"></td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <a type="button" class="btn btn-primary"
+                                                th:href="@{/vendas/{id} (id=${vendas.id})}">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                            <a type="button" class="btn btn-warning"
+                                                th:href="@{/vendas/{id}/editar (id=${vendas.id})}">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <a type="button" class="btn btn-danger"
+                                                th:href="@{/vendas/{id}/excluir (id=${vendas.id})}"
+                                                onclick="return confirm('Tem certeza que deseja excluir a venda?');">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div>
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination justify-content-center">
+                                    <li class="page-item"
+                                        th:classappend="${!vendas.hasPrevious()} ? 'disabled' : ''">
+                                        <a class="page-link"
+                                            th:href="@{/vendas/listar(page=${vendas.number - 1})}"
+                                            aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                        </a>
+                                    </li>
+                                    <li class="page-item"
+                                        th:each="item : ${#numbers.sequence(0, vendas.totalPages - 1)}"
+                                        th:classappend="${item == vendas.number} ? 'active' : ''">
+                                        <a class="page-link" th:href="@{/vendas/listar(page=${item})}"
+                                            th:text="${item + 1}">1</a>
+                                    </li>
+                                    <li class="page-item" th:classappend="${!vendas.hasNext()} ? 'disabled' : ''">
+                                        <a class="page-link"
+                                            th:href="@{/vendas/listar(page=${vendas.number + 1})}"
+                                            aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <th:block th:fragment="scripts">
+        <script>
+            $(function () {
+                $('[data-toggle="popover"]').popover()
+            })
+        </script>
+    </th:block>
+</body>
+</html>

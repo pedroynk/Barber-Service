@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html th:replace="~{layout :: layout (~{::title}, ~{::main}, ~{::styles}, ~{::scripts})}">
+
+<th:block th:fragment="styles">
+  <link rel="stylesheet" th:href="@{/plugins/select2/css/select2.min.css}">
+  <link rel="stylesheet" th:href="@{/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css}">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</th:block>
+
+
+<head>
+  <title>[[${vendas.id == null ? 'Dados da' : 'Editar'}]] Venda</title>
+</head>
+
+<body>
+  <main>
+    <div class="row">
+      <div class="col-sm-12">
+        <form method="POST" action="/vendas/cadastrar" th:object="${vendas}" enctype="multipart/form-data"
+          id="mainForm">
+          <div class="card">
+
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+            <div class="card-body">
+              <fieldset>
+
+                <input type="hidden" th:field="*{id}">
+
+                <div class="form-container row">
+
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label for="numero">Número da Venda</label>
+                      <input type="number" class="form-control" th:field="*{numero}" placeholder="Número da Venda"
+                        id="numero">
+                      <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('numero')}"
+                        th:errors="*{numero}" id="error-message-numero"></div>
+                            <script>
+                              document.addEventListener('DOMContentLoaded', function () {
+                                var errorMessage = document.getElementById('error-message-numero');
+                                if (errorMessage) {
+                                setTimeout(function () {
+                                errorMessage.style.display = 'none';
+                                }, 10000);
+                                }
+                                  });
+                            </script>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="dataVenda">Data da Venda</label>
+                      <input type="date" class="form-control" th:field="*{dataVenda}" placeholder="Data da Venda">
+                      <ul>
+                        <li class="text-danger" th:each="erro : ${#fields.errors('dataVenda')}"
+                        th:if="${#strings.contains(erro, 'DateTimeParseException')}">Formato inválido para data</li>
+                        <li class="text-danger" th:each="erro : ${#fields.errors('dataVenda')}"
+                        th:unless="${#strings.contains(erro, 'DateTimeParseException')}" th:text="${erro}"></li>
+                      </ul>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="quantidade">Quantidade de Pedidos</label>
+                      <input type="number" class="form-control" id="quantidade" th:field="*{quantidade}" placeholder="Quantidade de Pedidos">
+                    </div>
+
+                    <div id="lanche">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="formaPagamento">Forma de Pagamento</label>
+                    <select th:field="*{formaPagamento}" class="form-control">
+                      <option th:each="formaPagamento : ${formasPagamento}" th:value="${formaPagamento}"
+                        th:text="${formaPagamento.descricao}"></option>
+                    </select>
+                    <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('formaPagamento')}"
+                        th:errors="*{formaPagamento}" id="error-message-formaPagamento"></div>
+                            <script>
+                              document.addEventListener('DOMContentLoaded', function () {
+                                var errorMessage = document.getElementById('error-message-formaPagamento');
+                                if (errorMessage) {
+                                setTimeout(function () {
+                                errorMessage.style.display = 'none';
+                                }, 10000);
+                                }
+                                  });
+                            </script>
+                  </div>
+                  </div>
+                </div>
+            </div>
+          </div>
+      </div>
+
+      <div>
+        <label for="valorTotal1">Valor Total</label>
+        <input type="text" class="form-control" id="valorTotal1" name="valorTotal1" readonly>
+    </div>
+
+    <div class="card">
+      <button type="submit" form="mainForm" class="btn btn-primary">Cadastar</button>
+    </div>
+  </main>
+
+  <th:block th:fragment="scripts">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/date-fns/2.22.1/date_fns.min.js"></script>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/date-fns/2.22.1/date_fns.min.js"></script>
+
+
+
+  <style>
+.ui-autocomplete {
+        background-color: white;
+        border: 1px solid #ccc;
+        padding: 10px;
+        width: 300px;
+        max-height: 400px;
+        overflow-y: auto;
+      }
+
+      .ui-menu-item {
+        padding: 5px 10px;
+      }
+
+      .ui-menu-item:hover {
+        background-color: #f0f0f0;
+      }
+  </style>
+
+<style>
+  #valorTotal1 {
+      font-size: 20px;
+      color: rgb(0, 0, 0);
+      border: 2px solid rgb(255, 255, 255);
+      padding: 10px;
+      background-color: #ffffff;
+      border-radius: 5px;
+  }
+</style>
+
+<script>
+ function formatarComoMoeda(valor) {
+    return 'R$ ' + valor.toFixed(2).replace('.', ',').replace(/(\d)(?=(\d{3})+\,)/g, '$1.');
+}
+function atualizarValorTotal() {
+    var valorTotal1 = 0.0;
+    $("#lanche select").each(function() {
+        var preco = $(this).find('option:selected').data('price');
+        if(preco) {
+            valorTotal1 += parseFloat(preco);
+        }
+    });
+    $('#valorTotal1').val(formatarComoMoeda(valorTotal1));
+}
+$("#lanche").on("change", "select", atualizarValorTotal);
+
+</script>
+
+<script>
+$(document).ready(function () {
+    $("#quantidade").on("input", function () {
+        var quantidadeDesejada = parseInt($(this).val());
+        var lanche = $("#lanche");
+        var quantidadeExistente = lanche.find('select').length;
+
+        for (var i = quantidadeExistente; i < quantidadeDesejada; i++) {
+            lanche.append('<div class="form-group"><label for="lanche' + i + '">Lanche ' + (i + 1) + '</label><select class="form-control" id="lanche' + i + '" name="lanche[' + i + ']"><option value="">Selecione o lanche</option><option value="Café" data-price="1.50">Café</option><option value="Cachorro-Quente" data-price="3.00">Cachorro-Quente</option><option value="Pão com Carne" data-price="3.00">Pão com Carne</option><option value="Pão com Frango" data-price="3.00">Pão com Frango</option></select></div>');
+        }
+
+        while (quantidadeExistente > quantidadeDesejada) {
+            lanche.find('.form-group').last().remove();
+            quantidadeExistente--;
+        }
+        atualizarValorTotal();
+    });
+});
+
+</script>
+
+    <script>
+      $(function () {
+        $(document)
+          .on("click", ".btn-add", function (e) {
+            e.preventDefault();
+
+            var controlForm = $(".controls:first"),
+              currentEntry = $(this).parents(".entry:first"),
+              newEntry = $(currentEntry.clone()).appendTo(controlForm);
+
+            newEntry.find("input").val("");
+            controlForm
+              .find(".entry:not(:last) .btn-add")
+              .removeClass("btn-add")
+              .addClass("btn-remove")
+              .removeClass("btn-success")
+              .addClass("btn-danger")
+              .html('<span class="fa fa-trash"></span>');
+          })
+          .on("click", ".btn-remove", function (e) {
+            $(this).parents(".entry:first").remove();
+
+            e.preventDefault();
+            return false;
+          });
+      });
+    </script>
+  </th:block>
+</body>
+
+</html>

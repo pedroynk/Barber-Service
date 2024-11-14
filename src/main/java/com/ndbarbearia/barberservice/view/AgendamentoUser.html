@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendamento Barber Services</title>
+    <!-- Link para o CSS do Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Link para o Font Awesome para os ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="CadastroAdm-Funcionarios.css">
+    <style>
+        .centered-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        /* Estilos dos cartões dos barbeiros */
+        .barbeiro-card {
+            border: 2px solid transparent;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.2s ease, border-color 0.3s ease;
+        }
+
+        .barbeiro-card img {
+            width: 100%;
+            height: auto;
+        }
+
+        /* Efeito de seleção do cartão */
+        .barbeiro-card.selected {
+            border-color: #007bff;
+            transform: scale(1.05);
+        }
+
+        /* Data e horários centralizados */
+        .horario {
+            cursor: pointer;
+            padding: 12px 24px;
+            font-size: 1.1em;
+            margin: 5px;
+            border: 1px solid #007bff;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            display: inline-block;
+        }
+
+        .horario.selected {
+            background-color: #007bff;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar para Cliente -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+        <a class="navbar-brand d-flex align-items-center" href="home.html">
+            <img src="C:/Users/luisl/Downloads/Logo Barber Service.jpg" alt="Logo Circular" class="rounded-circle me-2" width="50" height="50">
+            <i class="fas fa-cut"></i><h2>BARBER SERVICES</h2>
+        </a>
+        <!-- Ícones de Navegação voltados para o Cliente -->
+        <ul class="navbar-nav mb-2 mb-lg-0">
+            <li class="nav-item">
+                <a class="nav-link" href="agendar-horario.html" title="Agendar Horário">
+                    <i class="fas fa-calendar-plus"></i> Agendar Horário
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="verificar-agendamentos.html" title="Verificar Horários Agendados">
+                    <i class="fas fa-calendar-check"></i> Verificar Agendamentos
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="alterar-perfil.html" title="Alterar Perfil">
+                    <i class="fas fa-user-edit"></i> Alterar Perfil
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="logoff.html" title="Log Off">
+                    <i class="fas fa-sign-out-alt"></i> Sair
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Tela de Agendamento -->
+<div class="container mt-5 centered-container">
+    <h2>Agendar Horário</h2>
+
+    <!-- Seleção de Barbeiro -->
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="barbeiro-card" data-barbeiro="1" onclick="selecionarBarbeiro(this)">
+                <img src="https://via.placeholder.com/150" alt="João">
+                <h5 class="text-center mt-2">João</h5>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="barbeiro-card" data-barbeiro="2" onclick="selecionarBarbeiro(this)">
+                <img src="https://via.placeholder.com/150" alt="Carlos">
+                <h5 class="text-center mt-2">Carlos</h5>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="barbeiro-card" data-barbeiro="3" onclick="selecionarBarbeiro(this)">
+                <img src="https://via.placeholder.com/150" alt="Fernando">
+                <h5 class="text-center mt-2">Fernando</h5>
+            </div>
+        </div>
+    </div>
+
+    <!-- Seleção de Data -->
+    <div class="mt-4">
+        <h4>Selecione a Data</h4>
+        <input type="date" class="form-control w-50" id="dataAgendamento" onchange="mostrarHorarios()">
+    </div>
+
+    <!-- Seleção de Horário -->
+    <div id="horariosDisponiveis" class="mt-4"></div>
+
+    <!-- Botão de Agendamento -->
+    <button type="button" class="btn btn-primary mt-4" onclick="confirmarAgendamento()">Confirmar Agendamento</button>
+</div>
+
+<!-- Script do Bootstrap 5 -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    let barbeiroSelecionado = null;
+    const horariosDisponiveis = {
+        "1": ["09:00", "10:00", "11:00"],
+        "2": ["14:00", "15:00", "16:00"],
+        "3": ["13:00", "15:00", "17:00"]
+    };
+
+    function selecionarBarbeiro(element) {
+        document.querySelectorAll('.barbeiro-card').forEach(card => {
+            card.classList.remove('selected');
+        });
+        element.classList.add('selected');
+        barbeiroSelecionado = element.getAttribute('data-barbeiro');
+        mostrarHorarios();
+    }
+
+    function mostrarHorarios() {
+        const dataAgendamento = document.getElementById('dataAgendamento').value;
+        if (!barbeiroSelecionado || !dataAgendamento) return;
+
+        const horarioContainer = document.getElementById('horariosDisponiveis');
+        horarioContainer.innerHTML = '<h4>Horários Disponíveis</h4>';
+        
+        horariosDisponiveis[barbeiroSelecionado].forEach(horario => {
+            const horarioElement = document.createElement('div');
+            horarioElement.classList.add('horario');
+            horarioElement.textContent = horario;
+            horarioElement.onclick = () => selecionarHorario(horarioElement);
+            horarioContainer.appendChild(horarioElement);
+        });
+    }
+
+    function selecionarHorario(element) {
+        document.querySelectorAll('.horario').forEach(horario => {
+            horario.classList.remove('selected');
+        });
+        element.classList.add('selected');
+    }
+
+    function confirmarAgendamento() {
+        if (!barbeiroSelecionado) {
+            alert("Por favor, selecione um barbeiro.");
+            return;
+        }
+        const dataAgendamento = document.getElementById('dataAgendamento').value;
+        const horarioSelecionado = document.querySelector('.horario.selected');
+        
+        if (!dataAgendamento) {
+            alert("Por favor, selecione uma data.");
+            return;
+        }
+        if (!horarioSelecionado) {
+            alert("Por favor, selecione um horário.");
+            return;
+        }
+        alert(`Agendamento confirmado com o barbeiro ${barbeiroSelecionado} no dia ${dataAgendamento} às ${horarioSelecionado.textContent}!`);
+    }
+</script>
+</body>
+</html>

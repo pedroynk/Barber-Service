@@ -1,0 +1,73 @@
+/* Estilos Globais */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+    padding-bottom: 20px;
+}
+
+/* Navbar */
+.navbar {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand h2 {
+    font-size: 1.5rem;
+    margin-left: 10px;
+}
+
+.navbar-nav .nav-link {
+    font-size: 1.2rem;
+}
+
+.navbar-nav .nav-link.active {
+    background-color: #0d6efd;
+    border-radius: 5px;
+}
+
+/* Cabeçalho da Página */
+h3 {
+    font-weight: bold;
+    color: #0d6efd;
+}
+
+/* Botão de Cadastro */
+.btn-primary {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #0b5ed7;
+    border-color: #0a58ca;
+}
+
+/* Tabela de Funcionários */
+.table {
+    background-color: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.table th {
+    background-color: #0d6efd;
+    color: #ffffff;
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+.table td {
+    text-align: center;
+    vertical-align: middle;
+    font-size: 1rem;
+    color: #333;
+}
+
+/* Estilo para Linha Vazia */
+.table tbody tr td {
+    color: #6c757d;
+    font-style: italic;
+}
+
+/* Respon

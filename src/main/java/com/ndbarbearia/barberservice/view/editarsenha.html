@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Senha</title>
+    <!-- Link para o CSS do Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Link para o Font Awesome para os ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        .form-container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 2px solid white;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+
+        .form-container h2 {
+            color: #007bff;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .form-text {
+            font-size: 0.9em;
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+        <a class="navbar-brand d-flex align-items-center" href="home.html">
+            <img src="C:/Users/luisl/Downloads/Logo Barber Service.jpg" alt="Logo Circular" class="rounded-circle me-2" width="50" height="50">
+            <h2><i class="fas fa-cut"></i> BARBER SERVICES</h2>
+        </a>
+    </div>
+</nav>
+
+<!-- Formulário de Edição de Senha -->
+<div class="form-container">
+    <h2>Editar Senha</h2>
+    <form id="formEditarSenha">
+        <div class="mb-3">
+            <label for="senhaAtual" class="form-label">Senha Atual</label>
+            <input type="password" class="form-control" id="senhaAtual" placeholder="Digite sua senha atual" required>
+        </div>
+        <div class="mb-3">
+            <label for="novaSenha" class="form-label">Nova Senha</label>
+            <input type="password" class="form-control" id="novaSenha" placeholder="Digite sua nova senha" required>
+            <div class="form-text">A senha deve ter pelo menos 8 caracteres, incluindo uma letra maiúscula e um número.</div>
+        </div>
+        <div class="mb-3">
+            <label for="confirmarNovaSenha" class="form-label">Confirme a Nova Senha</label>
+            <input type="password" class="form-control" id="confirmarNovaSenha" placeholder="Confirme sua nova senha" required>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Salvar Alterações</button>
+    </form>
+</div>
+
+<!-- Script do Bootstrap 5 -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.getElementById('formEditarSenha').addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        // Coletando os valores
+        const senhaAtual = document.getElementById('senhaAtual').value;
+        const novaSenha = document.getElementById('novaSenha').value;
+        const confirmarNovaSenha = document.getElementById('confirmarNovaSenha').value;
+
+        // Validações básicas
+        if (novaSenha.length < 8 || !/[A-Z]/.test(novaSenha) || !/\d/.test(novaSenha)) {
+            alert('A nova senha deve ter pelo menos 8 caracteres, incluindo uma letra maiúscula e um número.');
+            return;
+        }
+
+        if (novaSenha !== confirmarNovaSenha) {
+            alert('A nova senha e a confirmação devem ser iguais.');
+            return;
+        }
+
+        // Substituir este trecho por lógica de backend (se aplicável)
+        alert('Senha alterada com sucesso!');
+        window.location.href = "home.html";
+    });
+</script>
+
+</body>
+</html>

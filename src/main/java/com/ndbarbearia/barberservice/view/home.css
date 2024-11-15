@@ -1,0 +1,80 @@
+/* Estilo da barra de navegação */
+#navbar {
+    background-color:#93b7b7; /* Cor de fundo da barra */
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Adiciona sombra suave */
+}
+
+/* Estilo do logo */
+.logo {
+    display: flex;
+    align-items: center;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.logo img {
+    height: 50px; /* Tamanho da imagem */
+    width: 50px; /* Garante que seja um círculo perfeito */
+    border-radius: 50%; /* Torna a imagem circular */
+    margin-right: 10px; /* Espaçamento entre o ícone e o texto */
+    object-fit: cover; /* Garante que a imagem se ajuste bem no círculo */
+}
+
+/* Estilo para a lista de navegação */
+.navbar-nav {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Estilo de cada item da barra de navegação */
+.navbar-nav .nav-item {
+    margin-left: 20px; /* Espaçamento entre os itens */
+}
+
+/* Estilo dos links de navegação */
+.navbar-nav .nav-link {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: color 0.3s ease; /* Animação suave para a mudança de cor */
+}
+
+/* Efeito de hover nos links de navegação */
+.navbar-nav .nav-link:hover {
+    color: #f1f1f1; /* Cor ao passar o mouse */
+}
+
+/* Estilo para os ícones de navegação */
+.navbar-nav .nav-link i {
+    margin-right: 8px; /* Espaçamento entre o ícone e o texto */
+}
+
+/* Estilo responsivo para a barra de navegação */
+@media (max-width: 768px) {
+    #navbar {
+        flex-direction: column; /* Alinha os itens na vertical em telas pequenas */
+        text-align: center;
+    }
+
+    .navbar-nav {
+        flex-direction: column; /* Alinha os itens na vertical */
+    }
+
+    .navbar-nav .nav-item {
+        margin-left: 0;
+        margin-top: 10px; /* Espaçamento vertical entre os itens */
+    }
+
+    .logo {
+        margin-bottom: 10px; /* Espaçamento abaixo do logo em telas pequenas */
+    }
+}

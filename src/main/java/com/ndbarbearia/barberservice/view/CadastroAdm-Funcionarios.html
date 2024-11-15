@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BS Admin</title>
+    <!-- Link para o CSS do Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Link para o Font Awesome para os ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="CadastroAdm-Funcionarios.css">
+</head>
+<body>
+
+<!-- Navbar -->
+<!-- Barra de navegação com logo circular -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+        <!-- Logo com texto -->
+        <a class="navbar-brand d-flex align-items-center" href="home.html">
+            <!-- Imagem da logo circular -->
+            <img src="C:\Users\luisl\Downloads\Logo Barber Service.jpg" alt="Logo Circular" class="rounded-circle me-2" width="50" height="50">
+            <i class="fas fa-code"></i><h2>BARBER SERVICES</h2>
+        </form>
+
+        <!-- Ícones de Navegação -->
+        <ul class="navbar-nav mb-2 mb-lg-0">
+            <!-- Atendimento -->
+            <li class="nav-item">
+                <a class="nav-link" href="atendimento.html" title="Atendimento">
+                    <i class="fas fa-headset"></i>
+                </a>
+            </li>
+
+            <!-- Calendário -->
+            <li class="nav-item mb-2 mb-lg-0">
+                <a class="nav-link" href="calendario.html" title="Calendário">
+                    <i class="fas fa-calendar-alt"></i>
+                </a>
+            </li>
+
+            <!-- Gerenciar Agenda -->
+            <li class="nav-item mb-2 mb-lg-0">
+                <a class="nav-link" href="gerenciar-agenda.html" title="Gerenciar Agenda">
+                    <i class="fas fa-tasks"></i>
+                </a>
+            </li>
+
+            <!-- Funcionários -->
+            <li class="nav-item mb-2 mb-lg-0">
+                <a class="nav-link" href="funcionarios.html" title="Funcionários">
+                    <i class="fas fa-users"></i>
+                </a>
+            </li>
+
+            <!-- Ícone de Admin Logado -->
+            <li class="nav-item mb-2 mb-lg-0">
+                <a class="nav-link" href="adm-perfil.html">
+                    <i class="fas fa-user-shield"></i> 
+
+            <!-- Log Off -->
+            <li class="nav-item mb-2 mb-lg-0">
+                <a class="nav-link" href="logoff.html" title="Log Off">
+                    <i class="fas fa-sign-out-alt"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="row g-3">
+    <div class="col">
+        <label for="Primeiro Nome" class="form-label"> Primeiro Nome</label>
+        <input type="text" class="form-control" placeholder="Primeiro Nome" aria-label="Primeiro Nome" required>
+    </div><br><br>
+    <div class="col">
+        <label for="Sobrenome" class="form-label">Sobrenome</label>
+       <input type="text" class="form-control" placeholder="Sobrenome" aria-label="Sobrenome" required>
+    </div>
+</div><br><br>
+
+<form class="row g-3">
+<div class="col-md-6">
+<label for="inputEmail4" class="form-label">Email</label>
+<input type="email" class="form-control" id="inputEmail4" placeholder="Email" aria-label="Email" required>
+</div><br><br>
+
+<div class="col-md-6">
+    <label for="inputSenha4" class="form-label">Senha</label>
+    <input type="password" class="form-control" id="inputSenha4" placeholder="Senha" aria-label="Senha" required>
+</div>
+
+<div class="col-12">
+    <label for="inputEndereco" class="form-label">Endereço</label>
+    <input type="text" class="form-control" id="inputEndereco" placeholder="Quadra 50 St Leste" aria-label="Quadra 50 St Leste" required>
+</div>
+
+<div class="col-12">
+    <label for="inputComplemento" class="form-label">Endereço</label>
+    <input type="text" class="form-control" id="inputComplemento" placeholder="Apartamento, Casa" arial-label="Apartamento, Casa" required>
+</div>
+
+<div class="col-md-6">
+<label for="inputCidade" class="form-label">Cidade</label>
+<input type="text" class="form-control" id="inputCidade" required>
+</div>
+
+<div class="col-md-4">
+    <label for="InputEstado" class="form-label">Estado</label>
+    <select name="Estado" id="InputEstado" class="form-select">
+        <option selected>Escolher</option>
+        <option>DF</option>
+        <option>GO</option>
+    </select>
+</div>
+
+<div class="col-md-2">
+    <label for="InputCep" class="form-label">Cep</label>
+    <input type="text" class="form-control" id="InputCep">
+</div>
+<div class="col-12">
+    <button type="submit" class="btn btn-primary">Cadastrar</button>
+</div>
+</form>
+<!-- Script do Bootstrap 5 -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="CadastroAdm-Funcionarios.js"></script>
+</body>
+</html>

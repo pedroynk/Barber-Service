@@ -1,7 +1,7 @@
 # Barber-Service
 
 <div align="center">
-  <img align="center" alt="Logo Barber Service" height="500" width="500" src="src\main\resources\static\img\docs\Logo Barber Service.jpg">
+  <img align="center" alt="Logo Barber Service" height="500" width="500" src="config/logo_barber_sevice.jpg">
 </div>
 
 

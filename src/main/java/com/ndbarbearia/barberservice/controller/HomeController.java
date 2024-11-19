@@ -10,8 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HomeController {
 
     @GetMapping()
-    public ModelAndView home() {
+    public ModelAndView home(/*Principal principal*/) {
         ModelAndView modelAndView = new ModelAndView("home/home");
+        // modelAndView.addObject("principal", principal);
         return modelAndView;
     }
 }

@@ -11,7 +11,7 @@ import com.ndbarbearia.barberservice.model.Usuario;
 import com.ndbarbearia.barberservice.repository.UsuarioRepository;
 
 @Service
-public class UsuarioDetailsServiceImpl implements UserDetailsService {
+public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
     private UsuarioRepository usuarioRepository;

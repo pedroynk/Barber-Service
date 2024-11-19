@@ -39,7 +39,7 @@ public class BarberserviceApplication implements CommandLineRunner {
 
             Usuario usuario = Usuario.builder()
                     .nome(usuarioNome)
-                    .email(usuarioSenha)
+                    .email(usuarioEmail)
                     .senha(usuarioSenha)
                     .perfil(perfil)
                     .ativo(true)

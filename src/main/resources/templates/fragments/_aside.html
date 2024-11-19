@@ -1,23 +1,10 @@
 <aside th:fragment="aside" class="main-sidebar sidebar-dark-primary elevation-4">
   <a th:href="@{/}" class="brand-link">
-    <img th:src="@{/img/kylanches.jpeg}" alt="AdminLTE Logo" class="brand-image img-square elevation-3">
-    <span class="brand-text font-weight-strong">Painel de Controle</span>
+    <img th:src="@{/img/logo_barber_service.jpg}" alt="AdminLTE Logo" class="brand-image img-square elevation-3">
+    <span class="brand-text font-weight-strong">Barber Service</span>
   </a>
 
   <div class="sidebar">
-
-    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-      <div class="info d-flex align-items-center">
-        <img class="img-circle mr-2" th:src="@{'/files/' + ${#authentication.principal.id}}" alt="Foto de perfil" />
-        <a th:href="@{/perfil}" class="d-block">
-          <span th:if="${#strings.arraySplit(#authentication.principal.nome, ' ').length <= 2}"
-            th:text="${#authentication.principal.nome}"></span>
-          <span th:if="${#strings.arraySplit(#authentication.principal.nome, ' ').length > 2}"
-            th:text="${#strings.arraySplit(#authentication.principal.nome, ' ')[0] + ' ' + #strings.arraySplit(#authentication.principal.nome, ' ')[1]}"></span>
-        </a>
-        </a>
-      </div>
-    </div>
 
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">

@@ -1,4 +1,4 @@
-package com.kylanches.paineldecontrole;
+package com.ndbarbearia.barberservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

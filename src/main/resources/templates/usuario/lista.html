@@ -56,14 +56,12 @@
                                                 Visualizar
                                             </a>
                                             <a class="dropdown-item"
-                                                th:href="@{/usuarios/{id}/editar (id=${usuario.id})}"
-                                                th:if="${#authorization.expression('hasAuthority(''ADMINISTRADOR'')')}">
+                                                th:href="@{/usuarios/{id}/editar (id=${usuario.id})}">
                                                 Editar
                                             </a>
                                             <a class="dropdown-item"
                                                 th:href="@{/usuarios/{id}/excluir (id=${usuario.id})}"
-                                                onclick="return confirm('Tem certeza que deseja excluir o usuario?');"
-                                                th:if="${#authorization.expression('hasAuthority(''ADMINISTRADOR'')')}">
+                                                onclick="return confirm('Tem certeza que deseja excluir o usuario?');">
                                                 Excluir
                                             </a>
                                         </div>

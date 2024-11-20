@@ -114,14 +114,14 @@ body {
     </div>
     <div class="form-section">
       <h2>Seja Bem-Vindo!</h2>
-      <form method="POST" th:action="@{/login}">
+      <form method="POST" th:action="@{login}">
         <div class="input-group">
           <input type="email" class="form-control" placeholder="Digite seu Email" name="username" required>
         </div>
         <div class="input-group">
           <input type="password" class="form-control" placeholder="Digite sua Senha" name="password" required>
         </div>
-        <button type="submit" class="btn btn-primary btn-block">Fazer Login</button>
+        <button type="submit">Fazer Login</button>
       </form>
       <div class="social-icons">
         <a href="#"><i class="fab fa-whatsapp"></i></a>

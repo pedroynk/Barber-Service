@@ -4,38 +4,121 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tela de Login</title>
-  <link rel="stylesheet" href="css_user/login.css"> <!-- Link para o arquivo CSS -->
-  <link rel="stylesheet" th:href="@{/plugins/fontawesome-free/css/all.min.css}" />
-  <link rel="stylesheet" th:href="@{/plugins/icheck-bootstrap/icheck-bootstrap.min.css}" />
-  <link rel="stylesheet" th:href="@{/adminlte/css/adminlte.min.css}" />
-  <link rel="icon" type="image/png" th:href="@{/config/Logo.Barber.Service.jpg}">
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet" />
+  <style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background-color: #5376AB;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.login-container {
+  display: flex;
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.image-section {
+  background-color: #e5e5e5;
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-section img {
+  max-width: 250px;
+  border-radius: 10px;
+}
+
+.form-section {
+  padding: 40px;
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centraliza os itens na coluna */
+}
+
+.form-section h2 {
+  margin-bottom: 20px;
+  color: #333;
+  text-align: center; /* Centraliza o título */
+}
+
+.form-section form {
+  display: flex;
+  flex-direction: column;
+  width: 100%; /* Garante que o formulário ocupe toda a largura da seção */
+}
+
+.form-section input {
+  margin-bottom: 15px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  width: 100%; /* Faz os inputs ocuparem toda a largura disponível */
+}
+
+.form-section button {
+  background-color: #5376AB;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 100%; /* Faz o botão ocupar toda a largura disponível */
+}
+
+.form-section button:hover {
+  background-color: #3a5887;
+}
+
+.social-icons {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+  justify-content: center;
+}
+
+.social-icons a {
+  font-size: 24px;
+  color: #000;
+  text-decoration: none;
+}
+  </style>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tela de Login</title>
 </head>
 <body>
   <div class="login-container">
     <div class="image-section">
-      <img th:src="@{/config/Logo.Barber.Service.jpg}" alt="Logo">
+      <img src="\resources\templates\logo_barber_sevice.jpg" alt="Logo">
     </div>
     <div class="form-section">
       <h2>Seja Bem-Vindo!</h2>
-      <form method="POST" th:action="@{/login}">
+      <form method="POST" th:action="@{login}">
         <div class="input-group">
           <input type="email" class="form-control" placeholder="Digite seu Email" name="username" required>
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-user"></span>
-            </div>
-          </div>
         </div>
         <div class="input-group">
           <input type="password" class="form-control" placeholder="Digite sua Senha" name="password" required>
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-lock"></span>
-            </div>
-          </div>
         </div>
-        <button type="submit" class="btn btn-primary btn-block">Fazer Login</button>
+        <button type="submit">Fazer Login</button>
       </form>
       <div class="social-icons">
         <a href="#"><i class="fab fa-whatsapp"></i></a>
@@ -47,8 +130,8 @@
     </div>
   </div>
 
-  <script th:src="@{/plugins/jquery/jquery.min.js}"></script>
-  <script th:src="@{/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
-  <script th:src="@{/adminlte/js/adminlte.min.js}"></script>
+  <!-- Link para os ícones do FontAwesome -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </body>
 </html>
+

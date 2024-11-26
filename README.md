@@ -9,7 +9,7 @@ O Barber Service é um MVP Single feature Web (Mínimo Produto Viável Recurso �
 gerenciamento em relação as agendas dos stakeholders. A aplicação poderá permitir os clientes da barbearia escolher o barbeiro, o serviço desejado, e o horário disponível de forma prática e intuitiva. A aplicação conta com:
 
 - Interface gráfica amigável e bonita;
-- Aplicação com perfis múltiplos: ADMINISTRADOR, Cliente e Barbeiro;
+- Aplicação com perfis múltiplos: ADMINISTRADOR, CLIENTE e BARBEIRO;
 
 :rocket: Projeto com Arquitetura MVC e aplicações em Java.
 

@@ -10,7 +10,7 @@
     <h1>Agendar Serviço</h1>
 
     <!-- Formulário para escolher a data e ver horários disponíveis -->
-    <form action="/agendamento/horarios" method="post">
+    <form action="/agendamento/horarios" method="POST">
         <input type="hidden" name="barbeiroId" th:value="${barbeiroId}">
 
         <div>
@@ -28,8 +28,8 @@
         <!-- Iterando sobre a lista de horários -->
         <th:block th:each="horario : ${horarios}">
             <li>
-                <input type="radio" name="horario" value="${horario}" id="horario-${horario}">
-                <label for="horario-${horario}">
+                <input type="radio" name="horario" value="${horario}" id="horario-${horarios}">
+                <label for="horario-${horarios}">
                     <span th:text="${#dates.format(horario, 'HH:mm')}">Horário</span>
                 </label>
             </li>

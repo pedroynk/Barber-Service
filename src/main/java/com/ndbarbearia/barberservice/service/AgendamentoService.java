@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class AgendamentoService {
@@ -41,4 +43,19 @@ public class AgendamentoService {
 
         return agendamentoRepository.save(agendamento);
     }
+
+    public List<LocalDateTime> buscarHorariosDisponiveis(Long barbeiroId, LocalDateTime data) {
+        List<LocalDateTime> horarios = new ArrayList<>();
+        // Ajusta o início da data para o começo do dia
+        LocalDateTime inicio = data.withHour(9).withMinute(0).withSecond(0).withNano(0);
+        
+        for (int i = 0; i < 8; i++) {
+            LocalDateTime horario = inicio.plusHours(i);
+            if (!agendamentoRepository.existsByBarbeiroIdAndData(barbeiroId, horario)) {
+                horarios.add(horario);
+            }
+        }
+        return horarios;
+    }
+
 }

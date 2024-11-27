@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendamento - Barbearia</title>
+    <link rel="stylesheet" href="/path/to/your/styles.css">
+</head>
+<body>
+    <h1>Agendar Serviço</h1>
+
+    <!-- Formulário para escolher a data e ver horários disponíveis -->
+    <form action="/agendamento/horarios" method="post">
+        <input type="hidden" name="barbeiroId" th:value="${barbeiroId}">
+
+        <div>
+            <label for="data">Escolha a data:</label>
+            <input type="date" name="data" id="data" required>
+        </div>
+
+        <button type="submit">Ver horários disponíveis</button>
+    </form>
+
+   <!-- Mostra os horários disponíveis se houver -->
+<div id="horarios">
+    <h2>Horários Disponíveis</h2>
+    <ul>
+        <!-- Iterando sobre a lista de horários -->
+        <th:block th:each="horario : ${horarios}">
+            <li>
+                <input type="radio" name="horario" value="${horario}" id="horario-${horario}">
+                <label for="horario-${horario}">
+                    <span th:text="${#dates.format(horario, 'HH:mm')}">Horário</span>
+                </label>
+            </li>
+        </th:block>
+    </ul>
+</div>
+
+
+
+    <!-- Formulário para confirmar o agendamento -->
+    <form action="/api/agendamentos" method="post">
+        <input type="hidden" name="barbeiroId" th:value="${barbeiroId}">
+        <input type="hidden" name="data" th:value="${data}">
+
+        <div>
+            <label for="servico">Serviço:</label>
+            <select name="servicoDescricao" id="servico">
+                <option value="Corte">Corte</option>
+                <option value="Barba">Barba</option>
+                <option value="Corte e Barba">Corte e Barba</option>
+                <!-- Adicione mais serviços conforme necessário -->
+            </select>
+        </div>
+
+        <div>
+            <label for="horario">Escolha o horário:</label>
+            <ul id="horarios-list">
+                <!-- Loop Thymeleaf para exibir os horários disponíveis novamente -->
+                <li th:each="horario : ${horarios}">
+                    <input type="radio" name="horario" th:value="${horario}" th:id="'horario-' + ${horario}">
+                    <label th:for="'horario-' + ${horario}" th:text="${horario}"></label>
+                </li>
+            </ul>
+        </div>
+
+        <button type="submit">Confirmar Agendamento</button>
+    </form>
+</body>
+</html>

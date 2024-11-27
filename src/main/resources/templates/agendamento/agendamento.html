@@ -26,9 +26,8 @@
         <h2>Horários Disponíveis</h2>
         <ul>
             <li th:each="horario : ${horarios}">
-                <input type="radio" name="horario" th:value="${horario}" th:id="'horario-' + ${horario}">
-
-                <label th:for="'horario-' + ${horario}" th:text="${#dates.format(horario, 'HH:mm')}">Horário</label>
+                <input type="radio" name="horario" th:value="${horarios}" th:id="'horario-' + ${horarios}">
+                <label th:for="'horario-' + ${horarios}" th:text="${#dates.format(horarios, 'HH:mm')}">Horário</label>
             </li>
         </ul>
     </div>

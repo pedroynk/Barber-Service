@@ -1,9 +1,3 @@
-package com.ndbarbearia.barberservice.model;
-
-import jakarta.persistence.*;
-import lombok.*;
-import java.time.LocalDateTime;
-
 @Entity
 @Table(name = "agendamentos")
 @Data
@@ -32,10 +26,10 @@ public class Agendamento {
     private LocalDateTime data;
 
     public Agendamento(Usuario cliente, Usuario barbeiro, String servicoDescricao, LocalDateTime data) {
-        if (cliente.getPerfil() != Perfil.CLIENTE) {
+        if (cliente == null || cliente.getPerfil() != Perfil.CLIENTE) {
             throw new IllegalArgumentException("O usuário associado como cliente deve ter o perfil Cliente.");
         }
-        if (barbeiro.getPerfil() != Perfil.BARBEIRO) {
+        if (barbeiro == null || barbeiro.getPerfil() != Perfil.BARBEIRO) {
             throw new IllegalArgumentException("O usuário associado como barbeiro deve ter o perfil Barbeiro.");
         }
         this.cliente = cliente;

@@ -13,10 +13,10 @@ import org.slf4j.LoggerFactory;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.List;
 
 @Controller
 public class AgendamentoController {
-	private static final Logger logger = LoggerFactory.getLogger(AgendamentoController.class);
     @Autowired
     private AgendamentoService agendamentoService;
 
@@ -26,7 +26,7 @@ public class AgendamentoController {
     @GetMapping("/agendamento/formulario")
     public String mostrarFormularioAgendamento(@RequestParam Long barbeiroId, Model model) {
         model.addAttribute("barbeiroId", barbeiroId);
-        return "agendamento/agendamento-formulario";
+        return "agendamento/agendamento";
     }
 
     /**
@@ -35,18 +35,15 @@ public class AgendamentoController {
     @GetMapping("/agendamento/horarios")
     public String buscarHorarios(@RequestParam Long barbeiroId, @RequestParam String data, Model model) {
         try {
-            logger.debug("Barbeiro ID: {}", barbeiroId);
-            logger.debug("Data: {}", data);
-            // Converte a string da data para LocalDate e adiciona horário padrão
             LocalDate dataSelecionada = LocalDate.parse(data);
             LocalDateTime dataHoraInicio = dataSelecionada.atStartOfDay(); // Adiciona horário 00:00
-
+            List<LocalDateTime> horariosDisponiveis = agendamentoService.buscarHorariosDisponiveis(barbeiroId, dataHoraInicio);
             // Busca horários disponíveis no serviço
             model.addAttribute("barbeiroId", barbeiroId);
-            model.addAttribute("data", dataSelecionada);
-            model.addAttribute("horarios", agendamentoService.buscarHorariosDisponiveis(barbeiroId, dataHoraInicio));
+            model.addAttribute("data", dataHoraInicio);
+            model.addAttribute("horarios", horariosDisponiveis);
 
-            return "agendamento/agendamento-formulario.html";
+            return "agendamento/agendamento";
         } catch (Exception e) {
             // Log para debug
             System.err.println("Erro ao buscar horários: " + e.getMessage());

@@ -50,7 +50,7 @@ public class AgendamentoService {
         
         for (int i = 0; i < 8; i++) {
             LocalDateTime horario = inicio.plusHours(i);
-            if (!agendamentoRepository.existsByBarbeiroIdAndData(barbeiroId, horario)) {
+            if (!agendamentoRepository.existsByBarbeiroIdAndData(barbeiroId, data)) {
                 horarios.add(horario);
             }
         }

@@ -9,34 +9,62 @@
 <body>
     <h1>Agendar Serviço</h1>
 
-    <!-- Formulário para escolher a data e ver horários disponíveis -->
-    <form action="/agendamento/horarios" method="GET">
-        <input type="hidden" name="barbeiroId" th:value="${barbeiroId}">
-
+    <!-- Formulário para escolher a data -->
+    <form>
         <div>
             <label for="data">Escolha a data:</label>
             <input type="date" name="data" id="data" required>
         </div>
-
-        <button type="submit">Ver horários disponíveis</button>
     </form>
 
-   <!-- Mostra os horários disponíveis se houver -->
-   <div id="horarios" th:if="${horarios != null and horarios.size() > 0}">
+   <!-- Mostra os horários disponíveis de acordo com o barbeiroId -->
+   <div id="horarios">
         <h2>Horários Disponíveis</h2>
         <ul>
-            <li th:each="horario : ${horarios}">
-                <input type="radio" name="horario" th:value="${horarios}" th:id="'horario-' + ${horarios}">
-                <label th:for="'horario-' + ${horarios}" th:text="${#dates.format(horarios, 'HH:mm')}">Horário</label>
+            <!-- Lógica para exibir horários de acordo com o barbeiroId -->
+            <li th:if="${barbeiroId == 1}">
+                <input type="radio" name="horario" value="09:00" id="horario-1-09">
+                <label for="horario-1-09">09:00</label>
+            </li>
+            <li th:if="${barbeiroId == 1}">
+                <input type="radio" name="horario" value="10:00" id="horario-1-10">
+                <label for="horario-1-10">10:00</label>
+            </li>
+            <li th:if="${barbeiroId == 1}">
+                <input type="radio" name="horario" value="11:00" id="horario-1-11">
+                <label for="horario-1-11">11:00</label>
+            </li>
+
+            <li th:if="${barbeiroId == 2}">
+                <input type="radio" name="horario" value="14:00" id="horario-2-14">
+                <label for="horario-2-14">14:00</label>
+            </li>
+            <li th:if="${barbeiroId == 2}">
+                <input type="radio" name="horario" value="15:00" id="horario-2-15">
+                <label for="horario-2-15">15:00</label>
+            </li>
+            <li th:if="${barbeiroId == 2}">
+                <input type="radio" name="horario" value="16:00" id="horario-2-16">
+                <label for="horario-2-16">16:00</label>
+            </li>
+
+            <li th:if="${barbeiroId == 3}">
+                <input type="radio" name="horario" value="08:00" id="horario-3-08">
+                <label for="horario-3-08">08:00</label>
+            </li>
+            <li th:if="${barbeiroId == 3}">
+                <input type="radio" name="horario" value="12:00" id="horario-3-12">
+                <label for="horario-3-12">12:00</label>
+            </li>
+            <li th:if="${barbeiroId == 3}">
+                <input type="radio" name="horario" value="13:00" id="horario-3-13">
+                <label for="horario-3-13">13:00</label>
             </li>
         </ul>
     </div>
 
     <!-- Formulário para confirmar o agendamento -->
-    <form action="/api/agendamentos" method="post">
-        <input type="hidden" name="barbeiroId" th:value="${barbeiroId}">
-        <input type="hidden" name="data" th:value="${data}">
-
+    <form>
         <div>
             <label for="servico">Serviço:</label>
             <select name="servicoDescricao" id="servico">
@@ -57,7 +85,7 @@
             </ul>
         </div>
 
-        <button type="submit">Confirmar Agendamento</button>
+        <button type="submit" disabled>Confirmar Agendamento</button>
     </form>
 </body>
 </html>

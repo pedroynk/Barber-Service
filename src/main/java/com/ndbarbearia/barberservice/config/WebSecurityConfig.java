@@ -15,8 +15,9 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            .authorizeHttpRequests(authz -> authz
-                .anyRequest().authenticated()
+            .authorizeRequests(authz -> authz
+                .requestMatchers("/agendamento/**", "/css/**", "/js/**", "/images/**").permitAll()  // Libera acesso público
+                .anyRequest().authenticated() // Protege outras rotas
             )
             .formLogin(form -> form
                 .loginPage("/login") // Página de login personalizada

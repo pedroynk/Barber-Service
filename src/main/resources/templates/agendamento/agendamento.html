@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agendamento - Barbearia</title>
-    <link rel="stylesheet" href="/path/to/your/styles.css">
+    <link rel="stylesheet" href="/css/styles.css"> <!-- Corrigir caminho do CSS -->
 </head>
 <body>
     <h1>Agendar Serviço</h1>
 
     <!-- Formulário para escolher a data e ver horários disponíveis -->
-    <form action="/agendamento/horarios" method="POST">
+    <form action="/agendamento/horarios" method="GET">
         <input type="hidden" name="barbeiroId" th:value="${barbeiroId}">
 
         <div>
@@ -22,22 +22,16 @@
     </form>
 
    <!-- Mostra os horários disponíveis se houver -->
-<div id="horarios">
-    <h2>Horários Disponíveis</h2>
-    <ul>
-        <!-- Iterando sobre a lista de horários -->
-        <th:block th:each="horario : ${horarios}">
-            <li>
-                <input type="radio" name="horario" value="${horario}" id="horario-${horarios}">
-                <label for="horario-${horarios}">
-                    <span th:text="${#dates.format(horario, 'HH:mm')}">Horário</span>
-                </label>
+   <div id="horarios" th:if="${horarios != null and horarios.size() > 0}">
+        <h2>Horários Disponíveis</h2>
+        <ul>
+            <li th:each="horario : ${horarios}">
+                <input type="radio" name="horario" th:value="${horario}" th:id="'horario-' + ${horario}">
+
+                <label th:for="'horario-' + ${horario}" th:text="${#dates.format(horario, 'HH:mm')}">Horário</label>
             </li>
-        </th:block>
-    </ul>
-</div>
-
-
+        </ul>
+    </div>
 
     <!-- Formulário para confirmar o agendamento -->
     <form action="/api/agendamentos" method="post">
@@ -57,10 +51,9 @@
         <div>
             <label for="horario">Escolha o horário:</label>
             <ul id="horarios-list">
-                <!-- Loop Thymeleaf para exibir os horários disponíveis novamente -->
                 <li th:each="horario : ${horarios}">
                     <input type="radio" name="horario" th:value="${horario}" th:id="'horario-' + ${horario}">
-                    <label th:for="'horario-' + ${horario}" th:text="${horario}"></label>
+                    <label th:for="'horario-' + ${horario}" th:text="${#dates.format(horario, 'HH:mm')}"></label>
                 </li>
             </ul>
         </div>

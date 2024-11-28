@@ -1,137 +1,70 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tela de Login</title>
-  <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: Arial, sans-serif;
-}
-
-body {
-  background-color: #5376AB;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-.login-container {
-  display: flex;
-  background-color: white;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-}
-
-.image-section {
-  background-color: #e5e5e5;
-  padding: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.image-section img {
-  max-width: 250px;
-  border-radius: 10px;
-}
-
-.form-section {
-  padding: 40px;
-  width: 350px;
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Centraliza os itens na coluna */
-}
-
-.form-section h2 {
-  margin-bottom: 20px;
-  color: #333;
-  text-align: center; /* Centraliza o título */
-}
-
-.form-section form {
-  display: flex;
-  flex-direction: column;
-  width: 100%; /* Garante que o formulário ocupe toda a largura da seção */
-}
-
-.form-section input {
-  margin-bottom: 15px;
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  font-size: 14px;
-  width: 100%; /* Faz os inputs ocuparem toda a largura disponível */
-}
-
-.form-section button {
-  background-color: #5376AB;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 10px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  width: 100%; /* Faz o botão ocupar toda a largura disponível */
-}
-
-.form-section button:hover {
-  background-color: #3a5887;
-}
-
-.social-icons {
-  display: flex;
-  gap: 15px;
-  margin-top: 20px;
-  justify-content: center;
-}
-
-.social-icons a {
-  font-size: 24px;
-  color: #000;
-  text-decoration: none;
-}
-  </style>
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tela de Login</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Barber Service | Log in</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css" />
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
+  <link rel="stylesheet" href="/plugins/icheck-bootstrap/icheck-bootstrap.min.css" />
+  <link rel="stylesheet" href="/adminlte/css/adminlte.min.css" />
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet" />
 </head>
-<body>
-  <div class="login-container">
-    <div class="image-section">
-      <img src="../resources\static\img\logo_barber_sevice.jpg" alt="Logo">
+
+<body class="hold-transition login-page">
+  <div class="login-box">
+    <div class="login-logo">
+      <img src="/img/logo_barber_sevice.jpg" alt="Barber Service" class="brand-image img-square elevation-3" width="200" height="200">
     </div>
-    <div class="form-section">
-      <h2>Seja Bem-Vindo!</h2>
-      <form method="POST" th:action="@{login}">
-        <div class="input-group">
-          <input type="email" class="form-control" placeholder="Digite seu Email" name="username" required>
+    <div class="card">
+      <div class="card-body login-card-body">
+        <p class="login-box-msg">
+          Entre com suas credenciais para iniciar a sessão
+        </p>
+        <div th:if="${param.error != null}" class="alert alert-danger">
+          <span>Usuário e/ou senha incorretos</span>
         </div>
-        <div class="input-group">
-          <input type="password" class="form-control" placeholder="Digite sua Senha" name="password" required>
-        </div>
-        <button type="submit">Fazer Login</button>
-      </form>
-      <div class="social-icons">
-        <a href="#"><i class="fab fa-whatsapp"></i></a>
-        <a href="#"><i class="fab fa-instagram"></i></a>
-      </div>
-      <div th:if="${param.error != null}" class="alert alert-danger mt-3">
-        <span>Usuário e/ou senha incorretos</span>
+
+        <form method="POST" th:action="@{/login}">
+          <div class="input-group mb-3">
+            <input type="email" class="form-control" placeholder="E-mail" name="username" required />
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-user"></span>
+              </div>
+            </div>
+          </div>
+          <div class="input-group mb-3">
+            <input type="password" class="form-control" placeholder="Senha" name="password" required />
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-lock"></span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-8">
+              <div class="icheck-primary">
+                <input type="checkbox" id="remember-me" name="remember-me" />
+                <label for="remember-me">Lembrar-me</label>
+              </div>
+            </div>
+            <div class="col-4">
+              <button type="submit" class="btn btn-primary btn-block">
+                Entrar
+              </button>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
   </div>
 
-  <!-- Link para os ícones do FontAwesome -->
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <script src="/plugins/jquery/jquery.min.js"></script>
+  <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/adminlte/js/adminlte.min.js"></script>
 </body>
-</html>
 
+</html>

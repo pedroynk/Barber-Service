@@ -30,17 +30,4 @@ public class Agendamento {
 
     @Column(name = "data", nullable = false)
     private LocalDateTime data;
-
-    public Agendamento(Usuario cliente, Usuario barbeiro, String servicoDescricao, LocalDateTime data) {
-        if (cliente.getPerfil() != Perfil.CLIENTE) {
-            throw new IllegalArgumentException("O usuário associado como cliente deve ter o perfil Cliente.");
-        }
-        if (barbeiro.getPerfil() != Perfil.BARBEIRO) {
-            throw new IllegalArgumentException("O usuário associado como barbeiro deve ter o perfil Barbeiro.");
-        }
-        this.cliente = cliente;
-        this.barbeiro = barbeiro;
-        this.servicoDescricao = servicoDescricao;
-        this.data = data;
-    }
 }

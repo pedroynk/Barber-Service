@@ -1,7 +1,7 @@
 # Barber-Service
 
 <div align="center">
-  <img align="center" alt="Logo Barber Service" height="500" width="500" src="config/logo_barber_sevice.jpg">
+  <img align="center" alt="Logo Barber Service" height="500" width="500" src="src\main\resources\static\img\logo_barber_sevice.jpg">
 </div>
 
 
@@ -20,11 +20,6 @@ gerenciamento em relação as agendas dos stakeholders. A aplicação poderá pe
   <img align="center" alt="Java" height="40" width="50" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg">
   <img align="center" alt="Postgres" height="40" width="50" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original.svg">
   <img align="center" alt="Spring" height="40" width="50" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/spring/spring-original.svg">
-</div>
-
-## Diagrama de Caso de Uso
-<div align="center">
-  <img align="center" alt="Caso de Uso" height="500" width="500" src="src\main\resources\static\img\docs\Caso de Uso Barber Service.png">
 </div>
 
 

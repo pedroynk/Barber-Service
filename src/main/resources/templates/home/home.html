@@ -2,7 +2,7 @@
 <html th:replace="~{layout :: layout (~{::title}, ~{::main}, _, ~{::scripts})}">
 
 <head>
-  <title>Dashboard</title>
+  <title>Página Inicial</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="/assets/adminlte/css/adminlte.min.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -42,55 +42,52 @@
 </head>
 
 <body>
-  <!-- Main Content -->
   <th:block th:fragment="main">
     <div class="content-wrapper">
-      <!-- Logo Section -->
       <div class="logo-container">
         <img th:src="@{/img/logo_barber_sevice.jpg}" alt="Logo Circular" class="rounded-circle me-2" width="100" height="100">
       </div>
-      <!-- Welcome Text -->
       <div class="intro-text">
         <h1>Bem-vindo à Barber Services</h1>
         <p>Oferecemos cortes e serviços especializados para você! Conheça nossos barbeiros e agende seu horário agora mesmo.</p>
       </div>
 
-      <!-- Barbers Section -->
       <div class="container mt-5">
         <h3 class="text-center">Conheça Nossos Barbeiros</h3>
         <div class="row">
-          <div class="col-md-4 mb-4">
-            <div class="card">
-              <img src="https://via.placeholder.com/300" class="card-img-top" alt="Barbeiro 1">
-              <div class="card-body text-center">
-                <h5 class="card-title">João Silva</h5>
-                <p class="card-text">Barbeiro experiente com 10 anos de profissão. Especializado em cortes modernos e clássicos.</p>
-                <a href="#" class="btn btn-primary">Agendar</a>
-              </div>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="https://via.placeholder.com/300" class="card-img-top" alt="Barbeiro 1">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">João Silva</h5>
+                        <p class="card-text">Barbeiro experiente com 10 anos de profissão. Especializado em cortes modernos e clássicos.</p>
+                        <a href="/agendamento/cadastrar/2" class="btn btn-primary">Agendar</a>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="col-md-4 mb-4">
-            <div class="card">
-              <img src="https://via.placeholder.com/300" class="card-img-top" alt="Barbeiro 2">
-              <div class="card-body text-center">
-                <h5 class="card-title">Carlos Souza</h5>
-                <p class="card-text">Especialista em cortes de cabelo masculino e barba. Atendimento de alta qualidade e dedicação.</p>
-                <a href="#" class="btn btn-primary">Agendar</a>
-              </div>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="https://via.placeholder.com/300" class="card-img-top" alt="Barbeiro 2">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Carlos Souza</h5>
+                        <p class="card-text">Especialista em cortes de cabelo masculino e barba. Atendimento de alta qualidade e dedicação.</p>
+                        <a href="/agendamento/cadastrar/3" class="btn btn-primary">Agendar</a>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="col-md-4 mb-4">
-            <div class="card">
-              <img src="https://via.placeholder.com/300" class="card-img-top" alt="Barbeiro 3">
-              <div class="card-body text-center">
-                <h5 class="card-title">Ricardo Oliveira</h5>
-                <p class="card-text">Com 8 anos de experiência, Ricardo traz o melhor corte de cabelo e estilo para seus clientes.</p>
-                <a href="#" class="btn btn-primary">Agendar</a>
-              </div>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="https://via.placeholder.com/300" class="card-img-top" alt="Barbeiro 3">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Ricardo Oliveira</h5>
+                        <p class="card-text">Com 8 anos de experiência, Ricardo traz o melhor corte de cabelo e estilo para seus clientes.</p>
+                        <a href="/agendamento/cadastrar/4" class="btn btn-primary">Agendar</a>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
+    </div>
+    
 
       <div class="container mt-5">
         <h3 class="text-center">Onde Estamos</h3>

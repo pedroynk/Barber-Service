@@ -16,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.ndbarbearia.barberservice.model.Perfil;
 import com.ndbarbearia.barberservice.model.Usuario;
 import com.ndbarbearia.barberservice.repository.UsuarioRepository;
 import com.ndbarbearia.barberservice.utils.SenhaUtils;
@@ -64,11 +65,15 @@ public class UsuarioService {
         return Arrays.asList("ADMINISTRADOR", "BARBEIRO", "CLIENTE");
     }
 
+    public List<Usuario> buscarClientes() {
+        return usuarioRepository.findByPerfil(Perfil.CLIENTE);
+    }
+    
+
     public String saveProfilePicture(MultipartFile file) throws IOException {
         if (file.isEmpty()) {
             return null;
         }
-
         Path directoryPath = Paths.get(directory);
 
         if (!Files.exists(directoryPath)) {

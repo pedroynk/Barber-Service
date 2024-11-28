@@ -29,10 +29,10 @@
                             </thead>
                             <tbody>
                                 <tr th:each="usuario : ${usuarios}">
-                                    <td th:text="${usuario.id}">183</td>
-                                    <td th:text="${usuario.nome}">Clara Giovana Daniela Duarte</td>
-                                    <td th:text="${usuario.email}">clara_giovana@gmail.com</td>
-                                    <td th:text="${usuario.perfil}">Desenvolvedor(a) Front End Jr</td>
+                                    <td th:text="${usuario.id}">20</td>
+                                    <td th:text="${usuario.nome}">Ayrton Senna</td>
+                                    <td th:text="${usuario.email}">ayrtonsenna@gmail.com</td>
+                                    <td th:text="${usuario.perfil}">Piloto de F1</td>
                                     <td>
                                         <div class="dropdown-item">
                                             <form id="ativarForm" th:action="@{ativar/{id} (id=${usuario.id})}"
@@ -60,7 +60,7 @@
                                                 Editar
                                             </a>
                                             <a class="dropdown-item"
-                                                th:href="@{/usuarios/{id}/excluir (id=${usuario.id})}"
+                                                th:href="@{/usuarios/{id}/delete (id=${usuario.id})}"
                                                 onclick="return confirm('Tem certeza que deseja excluir o usuario?');">
                                                 Excluir
                                             </a>

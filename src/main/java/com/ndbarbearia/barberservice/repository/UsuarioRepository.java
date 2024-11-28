@@ -8,14 +8,16 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 import java.util.List;
 
+import com.ndbarbearia.barberservice.model.Perfil;
 import com.ndbarbearia.barberservice.model.Usuario;
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
-    List<Usuario> findByPerfil(String perfil);
+    List<Usuario> findByPerfil(Perfil perfil);
 
     Optional<Usuario> findByEmail(String email);
 
     Page<Usuario> findAll(Pageable pageable);
+
 }

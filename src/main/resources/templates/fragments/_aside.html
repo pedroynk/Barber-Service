@@ -1,5 +1,5 @@
 <aside th:fragment="aside" class="main-sidebar sidebar-dark-primary elevation-4">
-  <a th:href="@{/}" class="brand-link">
+  <a th:href="@{/home}" class="brand-link">
     <img th:src="@{/img/logo_barber_sevice.jpg}" alt="AdminLTE Logo" class="brand-image img-square elevation-3">
     <span class="brand-text font-weight-strong">Barber Service</span>
   </a>
@@ -11,8 +11,8 @@
 
         <li class="nav-item">
           <a th:href="@{/home}" class="nav-link">
-            <i class="nav-icon fas fa-tachometer-alt"></i>
-            <p>Dashboard</p>
+            <i class="nav-icon fas fa-home"></i>
+            <p>Página Inicial</p>
           </a>
         </li>
     
@@ -35,17 +35,17 @@
         </li>
         <li class="nav-item">
           <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-cash-register"></i>
+            <i class="nav-icon fas fa-clock"></i>
             <p>
-              Agendamento
+              Agendamentos
               <i class="fas fa-angle-left right"></i>
             </p>
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a th:href="@{/agendamento/lista}" class="nav-link">
-                <i class="fas fa-dollar-sign nav-icon"></i>
-                <p>Listar Agendamento</p>
+              <a th:href="@{/agendamento/listar}" class="nav-link">
+                <i class="fas fa-clipboard-list nav-icon"></i>
+                <p>Agendamentos</p>
               </a>
             </li>
           </ul>

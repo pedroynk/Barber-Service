@@ -65,27 +65,6 @@ public class AgendamentoController {
         return "agendamento/lista";
     }
 
-    @GetMapping("/{id}/editar")
-    public String mostrarFormularioDeEdicao(@PathVariable Long id, Model model) {
-        Agendamento agendamento = agendamentoService.buscarPorId(id);
-        List<Usuario> clientes = usuarioService.buscarClientes();
-        model.addAttribute("agendamento", agendamento);
-        model.addAttribute("clientes", clientes);
-        model.addAttribute("servicos", List.of("Corte de Cabelo", "Corte de Barba", "Corte de Cabelo e Barba"));
-        return "agendamento/formulario";
-    }
-
-    @PostMapping("/{id}/editar")
-    public String editarAgendamento(@PathVariable Long id, 
-                                    @RequestParam Long clienteId, 
-                                    @RequestParam String servicoDescricao, 
-                                    @RequestParam String data) {
-
-        LocalDateTime dataAgendamento = LocalDateTime.parse(data);
-        agendamentoService.editarAgendamento(id, clienteId, servicoDescricao, dataAgendamento);
-        return "redirect:/agendamento/listar";
-    }
-
     @GetMapping("/excluir/{id}")
     public String excluirAgendamento(@PathVariable Long id) {
         agendamentoService.excluirAgendamento(id);

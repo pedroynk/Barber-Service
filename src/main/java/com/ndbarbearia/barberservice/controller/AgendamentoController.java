@@ -26,7 +26,7 @@ public class AgendamentoController {
     @GetMapping("/agendamento/formulario")
     public String mostrarFormularioAgendamento(@RequestParam Long barbeiroId, Model model) {
         model.addAttribute("barbeiroId", barbeiroId);
-        return "agendamento/agendamento";
+        return "agendamento/agendamentos";
     }
 
     /**
@@ -43,7 +43,7 @@ public class AgendamentoController {
             model.addAttribute("data", dataHoraInicio);
             model.addAttribute("horarios", horariosDisponiveis);
 
-            return "agendamento/agendamento";
+            return "agendamento/agendamentos";
         } catch (Exception e) {
             // Log para debug
             System.err.println("Erro ao buscar horários: " + e.getMessage());

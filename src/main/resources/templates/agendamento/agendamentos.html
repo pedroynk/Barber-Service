@@ -1,91 +1,123 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agendamento - Barbearia</title>
-    <link rel="stylesheet" href="/css/styles.css"> <!-- Corrigir caminho do CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .centered-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .date-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        .date-container input[type="date"] {
+            font-size: 1.2em;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #007bff;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .horario {
+            cursor: pointer;
+            padding: 12px 24px;
+            font-size: 1.1em;
+            margin: 5px;
+            border: 1px solid #007bff;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            display: inline-block;
+        }
+
+        .horario.selected {
+            background-color: #007bff;
+            color: #fff;
+        }
+    </style>
 </head>
 <body>
-    <h1>Agendar Serviço</h1>
+    <!-- Incluindo o layout principal -->
+    <div th:replace="~{layout :: layout (title='Agendamento - Barbearia', content='agendamentoContent', styles='agendamentoStyles', scripts='agendamentoScripts')}"></div>
 
-    <!-- Formulário para escolher a data -->
-    <form>
-        <div>
-            <label for="data">Escolha a data:</label>
-            <input type="date" name="data" id="data" required>
+    <div th:fragment="agendamentoContent">
+        <div class="container mt-5 centered-container">
+            <h1>Agendar Serviço</h1>
+
+            <!-- Seleção de Data -->
+            <div id="step1">
+                <h4>Selecione a Data</h4>
+                <div class="date-container">
+                    <input type="date" class="form-control" id="dataAgendamento" onchange="mostrarHorarios()" required>
+                </div>
+                <button id="verHorarios" class="btn btn-primary mt-3" onclick="mostrarHorarios()">Ver horários disponíveis</button>
+            </div>
+
+            <!-- Horários Disponíveis -->
+            <div id="step2" style="display: none;">
+                <h4>Horários Disponíveis</h4>
+                <div id="horariosDisponiveis" class="mt-4"></div>
+                <button id="btnConfirmar" class="btn btn-success mt-3" onclick="confirmarAgendamento()" style="display: none;">Confirmar Agendamento</button>
+            </div>
         </div>
-    </form>
-
-   <!-- Mostra os horários disponíveis de acordo com o barbeiroId -->
-   <div id="horarios">
-        <h2>Horários Disponíveis</h2>
-        <ul>
-            <!-- Lógica para exibir horários de acordo com o barbeiroId -->
-            <li th:if="${barbeiroId == 1}">
-                <input type="radio" name="horario" value="09:00" id="horario-1-09">
-                <label for="horario-1-09">09:00</label>
-            </li>
-            <li th:if="${barbeiroId == 1}">
-                <input type="radio" name="horario" value="10:00" id="horario-1-10">
-                <label for="horario-1-10">10:00</label>
-            </li>
-            <li th:if="${barbeiroId == 1}">
-                <input type="radio" name="horario" value="11:00" id="horario-1-11">
-                <label for="horario-1-11">11:00</label>
-            </li>
-
-            <li th:if="${barbeiroId == 2}">
-                <input type="radio" name="horario" value="14:00" id="horario-2-14">
-                <label for="horario-2-14">14:00</label>
-            </li>
-            <li th:if="${barbeiroId == 2}">
-                <input type="radio" name="horario" value="15:00" id="horario-2-15">
-                <label for="horario-2-15">15:00</label>
-            </li>
-            <li th:if="${barbeiroId == 2}">
-                <input type="radio" name="horario" value="16:00" id="horario-2-16">
-                <label for="horario-2-16">16:00</label>
-            </li>
-
-            <li th:if="${barbeiroId == 3}">
-                <input type="radio" name="horario" value="08:00" id="horario-3-08">
-                <label for="horario-3-08">08:00</label>
-            </li>
-            <li th:if="${barbeiroId == 3}">
-                <input type="radio" name="horario" value="12:00" id="horario-3-12">
-                <label for="horario-3-12">12:00</label>
-            </li>
-            <li th:if="${barbeiroId == 3}">
-                <input type="radio" name="horario" value="13:00" id="horario-3-13">
-                <label for="horario-3-13">13:00</label>
-            </li>
-        </ul>
     </div>
 
-    <!-- Formulário para confirmar o agendamento -->
-    <form>
-        <div>
-            <label for="servico">Serviço:</label>
-            <select name="servicoDescricao" id="servico">
-                <option value="Corte">Corte</option>
-                <option value="Barba">Barba</option>
-                <option value="Corte e Barba">Corte e Barba</option>
-                <!-- Adicione mais serviços conforme necessário -->
-            </select>
-        </div>
+    <!-- Scripts específicos -->
+    <th:block th:fragment="agendamentoScripts">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
+            const horarios = ["09:00", "10:00", "11:00", "14:00", "15:00", "16:00"];
+            let horarioSelecionado = null;
 
-        <div>
-            <label for="horario">Escolha o horário:</label>
-            <ul id="horarios-list">
-                <li th:each="horario : ${horarios}">
-                    <input type="radio" name="horario" th:value="${horario}" th:id="'horario-' + ${horario}">
-                    <label th:for="'horario-' + ${horario}" th:text="${#dates.format(horario, 'HH:mm')}"></label>
-                </li>
-            </ul>
-        </div>
+            function mostrarHorarios() {
+                const data = document.getElementById('dataAgendamento').value;
 
-        <button type="submit" disabled>Confirmar Agendamento</button>
-    </form>
+                if (!data) {
+                    alert("Por favor, selecione uma data.");
+                    return;
+                }
+
+                const horarioContainer = document.getElementById('horariosDisponiveis');
+                horarioContainer.innerHTML = ""; // Limpa os horários anteriores
+
+                horarios.forEach(horario => {
+                    const div = document.createElement('div');
+                    div.classList.add('horario');
+                    div.textContent = horario;
+                    div.onclick = () => selecionarHorario(div);
+                    horarioContainer.appendChild(div);
+                });
+
+                document.getElementById('step1').style.display = 'none';
+                document.getElementById('step2').style.display = 'block';
+            }
+
+            function selecionarHorario(element) {
+                document.querySelectorAll('.horario').forEach(hor => hor.classList.remove('selected'));
+                element.classList.add('selected');
+                horarioSelecionado = element.textContent;
+                document.getElementById('btnConfirmar').style.display = 'block';
+            }
+
+            function confirmarAgendamento() {
+                if (horarioSelecionado) {
+                    alert(`Agendamento confirmado para ${horarioSelecionado}!`);
+                    // Aqui você pode redirecionar ou enviar o formulário com os dados
+                } else {
+                    alert("Por favor, selecione um horário.");
+                }
+            }
+        </script>
+    </th:block>
 </body>
 </html>

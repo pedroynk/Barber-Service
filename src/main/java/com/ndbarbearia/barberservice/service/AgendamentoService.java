@@ -63,4 +63,37 @@ public class AgendamentoService {
         return agendamentoRepository.findAll(pageable);
     }
 
+    public Agendamento buscarPorId(Long id) {
+        return agendamentoRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Agendamento não encontrado"));
+    }
+
+    public Agendamento editarAgendamento(Long id, Long clienteId, String servicoDescricao, LocalDateTime data) {
+        Agendamento agendamento = agendamentoRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Agendamento não encontrado"));
+        
+        Usuario cliente = usuarioRepository.findById(clienteId)
+                .orElseThrow(() -> new EntityNotFoundException("Cliente não encontrado"));
+
+        if (data.isBefore(LocalDateTime.now())) {
+            throw new IllegalArgumentException("A data do agendamento não pode ser no passado.");
+        }
+
+        if (!isBarbeiroDisponivel(agendamento.getBarbeiro(), data)) {
+            throw new IllegalArgumentException("O barbeiro não está disponível na data escolhida.");
+        }
+
+        agendamento.setCliente(cliente);
+        agendamento.setServicoDescricao(servicoDescricao);
+        agendamento.setData(data);
+
+        return agendamentoRepository.save(agendamento);
+    }
+
+    public void excluirAgendamento(Long id) {
+        Agendamento agendamento = agendamentoRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Agendamento não encontrado"));
+        agendamentoRepository.delete(agendamento);
+    }
+
 }

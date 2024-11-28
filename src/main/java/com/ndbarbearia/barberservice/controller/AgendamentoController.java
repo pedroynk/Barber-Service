@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -62,5 +63,41 @@ public class AgendamentoController {
         var agendamentos = agendamentoService.listarAgendamentosPaginados(pagina, tamanho);
         model.addAttribute("agendamentos", agendamentos);
         return "agendamento/lista";
+    }
+
+    @GetMapping("/{id}/editar")
+    public String mostrarFormularioDeEdicao(@PathVariable Long id, Model model) {
+        Agendamento agendamento = agendamentoService.buscarPorId(id);
+        List<Usuario> clientes = usuarioService.buscarClientes();
+        model.addAttribute("agendamento", agendamento);
+        model.addAttribute("clientes", clientes);
+        model.addAttribute("servicos", List.of("Corte de Cabelo", "Corte de Barba", "Corte de Cabelo e Barba"));
+        return "agendamento/formulario";
+    }
+
+    @PostMapping("/{id}/editar")
+    public String editarAgendamento(@PathVariable Long id, 
+                                    @RequestParam Long clienteId, 
+                                    @RequestParam String servicoDescricao, 
+                                    @RequestParam String data) {
+
+        LocalDateTime dataAgendamento = LocalDateTime.parse(data);
+        agendamentoService.editarAgendamento(id, clienteId, servicoDescricao, dataAgendamento);
+        return "redirect:/agendamento/listar";
+    }
+
+    @GetMapping("/excluir/{id}")
+    public String excluirAgendamento(@PathVariable Long id) {
+        agendamentoService.excluirAgendamento(id);
+        return "redirect:/agendamento/listar";
+    }
+
+    @GetMapping("/{id}")
+    public ModelAndView detalhes(@PathVariable Long id) {
+        ModelAndView modelAndView = new ModelAndView("agendamento/detalhes");
+
+        modelAndView.addObject("agendamento", agendamentoService.buscarPorId(id));
+
+        return modelAndView;
     }
 }

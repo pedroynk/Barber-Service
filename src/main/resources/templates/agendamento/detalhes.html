@@ -2,60 +2,64 @@
 <html th:replace="~{layout :: layout (~{::title}, ~{::main}, _, ~{::scripts})}">
 
 <head>
-    <title>Detalhes da Venda</title>
+    <title>Detalhes do Usuário</title>
 </head>
 
 <body>
     <main>
         <div class="row">
             <div class="col-sm-12">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="card card-primary ">
-                            <div class="card-header">
-                                <h3 class="profile-username text-center">Venda Nº: <span
-                                        th:text="${vendas.numero}"></span></h3>
+                <div class="card">
+                    <div class="card-body">
+                        <fieldset>
+                            <legend>Detalhes do Agendamento</legend>
 
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Cliente</label>
+                                        <p th:text="${agendamento.cliente.nome}"></p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Barbeiro</label>
+                                        <p th:text="${agendamento.barbeiro.nome}"></p>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="card-body">
 
-                                <strong><i class="fas fa-file-signature mr-1"></i> Número da venda</strong>
-                                <p class="text-muted" th:text="${vendas.numero}"></p>
-                                <hr>
-
-                                <strong><i class="fas fa-calendar-alt mr-1"></i> Data da Venda</strong>
-                                <p class="text-muted" th:text="${#temporals.format(vendas.dataVenda,'dd/MM/yyyy')}"></p>
-                                <hr>
-
-                                <strong><i class="fas fa-utensils mr-1"></i> Lanche</strong>
-                                <p class="text-muted" th:text="${#strings.replace(vendas.lanche.toString(), '[', '').replace(']', '')}"></p>
-                                <hr>
-
-                                <strong><i class="fas fa-money-check-alt mr-1"></i> Forma de Pagamento</strong>
-                                <p class="text-muted" th:text="${vendas.formaPagamento.descricao}"></p>
-                                <hr>
-
-                                <strong><i class="fas fa-shopping-cart mr-1"></i> Quantidade</strong>
-                                <p class="text-muted" th:text="${vendas.quantidade}"></p>
-                                <hr>
-
-                                <strong><i class="fas fa-dollar-sign mr-1"></i> Valor Total</strong>
-                                <p class="text-muted" th:text="${#numbers.formatCurrency(vendas.valorTotal)}"></p>
-                                <hr>
-
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Serviço</label>
+                                        <p th:text="${agendamento.servicoDescricao}"></p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Data e Hora</label>
+                                        <p th:text="${#dates.format(agendamento.data, 'dd/MM/yyyy HH:mm')}"></p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
 
-                    
+                        </fieldset>
+                    </div>
+                    <div class="card-footer">
+                        <a href="/agendamento/listar" class="btn btn-secondary">Voltar</a>
                     </div>
                 </div>
             </div>
         </div>
     </main>
-
     <th:block th:fragment="scripts">
+        <script th:src="@{/js/avatar.min.js}"></script>
         <script>
-
+            const email = document.getElementById("email").innerText;
+            const avatar = Avatar.from(document.getElementById('profile-user-img'), {
+                'email': email
+            });
         </script>
     </th:block>
 </body>

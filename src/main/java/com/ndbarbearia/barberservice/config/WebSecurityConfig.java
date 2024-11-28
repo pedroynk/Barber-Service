@@ -16,25 +16,25 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests(authz -> authz
-                .anyRequest().permitAll() // Permite o acesso a todas as URLs
+                .anyRequest().permitAll()
             )
             .formLogin(form -> form
                 .loginPage("/login")
                 .defaultSuccessUrl("/home")
-                .permitAll() // Permite o acesso ao login para qualquer usuário
+                .permitAll()
             )
             .logout(logout -> logout
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/login")
-                .permitAll() // Permite o acesso ao logout para qualquer usuário
+                .permitAll()
             )
-            .csrf().disable(); // Desabilitar CSRF (se necessário, especialmente para APIs)
+            .csrf().disable();
 
         return http.build();
     }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(); // Você ainda precisa de um encoder, mesmo que não tenha autenticação complexa
+        return new BCryptPasswordEncoder();
     }
 }
